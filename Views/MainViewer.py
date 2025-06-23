@@ -11,10 +11,11 @@ class GUI:
         self.__GUI.geometry(f"{width}x{height}")
         self.__GUI.title(f"{title}")
         self.__GUI.iconbitmap(f"{iconPath}")
+        self.__GUI.resizable(False, False)
 
         self.__txtPath = tkinter.Label(self.__GUI, text="Choose your txt log file: ")
         self.__btnChoosePath = tkinter.Button(self.__GUI, text="Open", command=lambda:self.__btnChoosePathEvent())
-        self.__txtLog = tkinter.Text(self.__GUI, wrap="word", height=100, width=200)
+        self.__txtLog = tkinter.Text(self.__GUI, wrap="word", height=22, width=80)
 
     def __body(self):
         self.__txtPath.grid(row=0,column=2)
@@ -36,7 +37,6 @@ class GUI:
         def update():
             try:
                 with open(path, 'r') as file:
-                    file.seek(0, 2)
                     while True:
                         line = file.readline()
 
@@ -53,5 +53,5 @@ class GUI:
         self.__body()
         self.__GUI.mainloop()
 
-x = GUI(height=400, width=700, title="Prueba")
-x.start()
+# x = GUI(height=400, width=700, title="Prueba")
+# x.start()

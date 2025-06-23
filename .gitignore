@@ -2,3 +2,6 @@
 __pycache__/
 *.pyc
 Pipfile.lock  (si usas pipenv)
+/build
+/dist
+*.spec
