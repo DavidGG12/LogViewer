@@ -17,6 +17,11 @@ class GUI:
         self.__btnChoosePath = tkinter.Button(self.__GUI, text="Open", command=lambda:self.__btnChoosePathEvent())
         self.__txtLog = tkinter.Text(self.__GUI, wrap="word", height=22, width=80)
 
+        #TAGS
+        self.__txtLog.tag_configure("ERROR", foreground="#DC0042")
+        self.__txtLog.tag_configure("INFO", foreground="#0173DB")
+        self.__txtLog.tag_configure("WARNING", foreground="#DBD400")
+
     def __body(self):
         self.__txtPath.grid(row=0,column=2)
         self.__btnChoosePath.grid(row=0, column=3)
@@ -40,8 +45,21 @@ class GUI:
                     while True:
                         line = file.readline()
 
+                        patternE = r"Error:"
+                        patternW = r"Warning:"
+                        patternI = r"Info:"
+
+                        if re.search(pattern=patternE, string=line):
+                            nmTag = "ERROR"
+                        elif re.search(pattern=patternW, string=line):
+                            nmTag = "WARNING"
+                        elif re.search(pattern=patternI, string=line):
+                            nmTag = "INFO"
+                        else:
+                            nmTag = ""
+
                         if line:
-                            txtWidgent.insert(tkinter.END, line)
+                            txtWidgent.insert(tkinter.END, line, nmTag)
                             txtWidgent.see(tkinter.END)
                         else:
                             time.sleep(0.5)
